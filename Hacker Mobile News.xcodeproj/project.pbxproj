@@ -9,23 +9,21 @@
 /* Begin PBXBuildFile section */
 		BA2AFCB72644DB2000FFBB46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AFCB62644DB2000FFBB46 /* AppDelegate.swift */; };
 		BA2AFCB92644DB2000FFBB46 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AFCB82644DB2000FFBB46 /* SceneDelegate.swift */; };
-		BA2AFCBB2644DB2000FFBB46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AFCBA2644DB2000FFBB46 /* ViewController.swift */; };
-		BA2AFCBE2644DB2000FFBB46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA2AFCBC2644DB2000FFBB46 /* Main.storyboard */; };
 		BA2AFCC12644DB2000FFBB46 /* Hacker_Mobile_News.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA2AFCBF2644DB2000FFBB46 /* Hacker_Mobile_News.xcdatamodeld */; };
 		BA2AFCC32644DB2100FFBB46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA2AFCC22644DB2100FFBB46 /* Assets.xcassets */; };
 		BA2AFCC62644DB2100FFBB46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA2AFCC42644DB2100FFBB46 /* LaunchScreen.storyboard */; };
+		BA2AFCCE2644DB5F00FFBB46 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AFCCD2644DB5F00FFBB46 /* NewsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BA2AFCB32644DB2000FFBB46 /* Hacker Mobile News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hacker Mobile News.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA2AFCB62644DB2000FFBB46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA2AFCB82644DB2000FFBB46 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BA2AFCBA2644DB2000FFBB46 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		BA2AFCBD2644DB2000FFBB46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BA2AFCC02644DB2000FFBB46 /* Hacker_Mobile_News.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Hacker_Mobile_News.xcdatamodel; sourceTree = "<group>"; };
 		BA2AFCC22644DB2100FFBB46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA2AFCC52644DB2100FFBB46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA2AFCC72644DB2100FFBB46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA2AFCCD2644DB5F00FFBB46 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +56,55 @@
 		BA2AFCB52644DB2000FFBB46 /* Hacker Mobile News */ = {
 			isa = PBXGroup;
 			children = (
-				BA2AFCB62644DB2000FFBB46 /* AppDelegate.swift */,
-				BA2AFCB82644DB2000FFBB46 /* SceneDelegate.swift */,
-				BA2AFCBA2644DB2000FFBB46 /* ViewController.swift */,
-				BA2AFCBC2644DB2000FFBB46 /* Main.storyboard */,
+				BA2AFCD12644DB7700FFBB46 /* Models */,
+				BA2AFCD02644DB7100FFBB46 /* Views */,
+				BA2AFCCF2644DB6800FFBB46 /* Controllers */,
+				BA2AFCD22644DD6D00FFBB46 /* Support */,
 				BA2AFCC22644DB2100FFBB46 /* Assets.xcassets */,
-				BA2AFCC42644DB2100FFBB46 /* LaunchScreen.storyboard */,
-				BA2AFCC72644DB2100FFBB46 /* Info.plist */,
-				BA2AFCBF2644DB2000FFBB46 /* Hacker_Mobile_News.xcdatamodeld */,
 			);
 			path = "Hacker Mobile News";
+			sourceTree = "<group>";
+		};
+		BA2AFCCF2644DB6800FFBB46 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BA2AFCCD2644DB5F00FFBB46 /* NewsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		BA2AFCD02644DB7100FFBB46 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BA2AFCD32644DD9000FFBB46 /* Storyboards */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BA2AFCD12644DB7700FFBB46 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BA2AFCBF2644DB2000FFBB46 /* Hacker_Mobile_News.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BA2AFCD22644DD6D00FFBB46 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				BA2AFCB62644DB2000FFBB46 /* AppDelegate.swift */,
+				BA2AFCB82644DB2000FFBB46 /* SceneDelegate.swift */,
+				BA2AFCC72644DB2100FFBB46 /* Info.plist */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		BA2AFCD32644DD9000FFBB46 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				BA2AFCC42644DB2100FFBB46 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,7 +166,6 @@
 			files = (
 				BA2AFCC62644DB2100FFBB46 /* LaunchScreen.storyboard in Resources */,
 				BA2AFCC32644DB2100FFBB46 /* Assets.xcassets in Resources */,
-				BA2AFCBE2644DB2000FFBB46 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,8 +177,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA2AFCC12644DB2000FFBB46 /* Hacker_Mobile_News.xcdatamodeld in Sources */,
-				BA2AFCBB2644DB2000FFBB46 /* ViewController.swift in Sources */,
 				BA2AFCB72644DB2000FFBB46 /* AppDelegate.swift in Sources */,
+				BA2AFCCE2644DB5F00FFBB46 /* NewsViewController.swift in Sources */,
 				BA2AFCB92644DB2000FFBB46 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -150,14 +186,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		BA2AFCBC2644DB2000FFBB46 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BA2AFCBD2644DB2000FFBB46 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		BA2AFCC42644DB2100FFBB46 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,7 +320,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N4L5Q64325;
-				INFOPLIST_FILE = "Hacker Mobile News/Info.plist";
+				INFOPLIST_FILE = "Hacker Mobile News/Support/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -300,7 +328,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.marioelo.Hacker-Mobile-News";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -311,7 +339,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N4L5Q64325;
-				INFOPLIST_FILE = "Hacker Mobile News/Info.plist";
+				INFOPLIST_FILE = "Hacker Mobile News/Support/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -319,7 +347,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.marioelo.Hacker-Mobile-News";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
