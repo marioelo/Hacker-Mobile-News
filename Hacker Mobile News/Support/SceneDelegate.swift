@@ -20,8 +20,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
     }
     
-    func createRootViewController() -> UIViewController {
-        let rootViewController = NewsViewController()
+    func createRootViewController() -> UIViewController? {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
+        let networkManager = NetworkManager()
+        let rootViewController = NewsViewController(
+            networkManager: networkManager,
+            persistenceManager: PersistenceManager(context: appDelegate.persistentContainer.viewContext)
+        )
         let navigationController = UINavigationController(rootViewController: rootViewController)
         navigationController.navigationBar.prefersLargeTitles = true
         return navigationController

@@ -6,74 +6,136 @@
 //
 
 import UIKit
+import SafariServices
 
-class NewsViewController: UITableViewController {
-
+class NewsViewController: UITableViewController  {
+    
+    var stories: [Story] = []
+    var networkManager: NetworkManager
+    var persistenceManager: PersistenceManager
+    var containerView: UIView!
+    
+    init(networkManager: NetworkManager, persistenceManager: PersistenceManager) {
+        self.networkManager = networkManager
+        self.persistenceManager = persistenceManager
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.backgroundColor = .systemBackground
         title = "Mobile News"
+        configureTableView()
+        fetchStories()
     }
+    
+    @objc func fetchStories() {
+        let dispatchGroup = DispatchGroup()
+        startLoading()
+        networkManager.getMobileNews { [weak self] result in
+            guard let self = self else { return }
+            dispatchGroup.enter()
+            switch result {
+            case .success(let stories):
+                stories.forEach { self.persistenceManager.saveStorie($0)}
+            case .failure(let error):
+                print("There was an error fetching the stories from service \(error)")
+            }
+            dispatchGroup.leave()
+            dispatchGroup.notify(queue: .main) {
+                self.stopLoading()
+                self.loadStoriesFromStorage()
+            }
+        }
+    }
+    
+    func loadStoriesFromStorage() {
+        self.persistenceManager.loadStories { result in
+            switch result {
+            case .success(let stories):
+                self.stories = stories
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            case .failure(let error):
+                print("There was an error loading the stories from Core Data \(error)")
+            }
+        }
+    }
+    
+    fileprivate func configureTableView() {
+        tableView.rowHeight = 84
+        tableView.backgroundColor = .systemBackground
+        tableView.register(StoryViewCell.self, forCellReuseIdentifier: StoryViewCell.reuseID)
+        tableView.tableFooterView = UIView(frame: .zero)
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(fetchStories), for: .valueChanged)
+    }
+    
+    
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return stories.count
     }
-
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: StoryViewCell.reuseID, for: indexPath) as! StoryViewCell
+        cell.set(story: stories[indexPath.row])
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let story = stories[indexPath.row]
+        guard let url = URL(string: story.url) else { return }
+        presentSafariVC(with: url)
     }
-    */
-
-    /*
-    // Override to support editing the table view.
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        guard editingStyle == .delete else { return }
+        tableView.beginUpdates()
+        let story = self.stories[indexPath.row]
+        persistenceManager.removeStory(story) {
+            self.stories.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .left)
+            tableView.endUpdates()
+        }
     }
-    */
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+}
 
+extension NewsViewController {
+    
+    func startLoading() {
+        containerView = UIView(frame: tableView.bounds)
+        tableView.backgroundView = containerView
+        containerView.alpha = 0
+        UIView.animate(withDuration: 0.25) { self.containerView.alpha = 0.8 }
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        containerView.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            activityIndicator.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
+        ]);
+        activityIndicator.startAnimating()
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    
+    
+    func stopLoading() {
+        DispatchQueue.main.async {
+            self.tableView.backgroundView = nil
+            self.containerView = nil
+            self.refreshControl?.endRefreshing()
+        }
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func presentSafariVC(with url: URL) {
+        let safariVC = SFSafariViewController(url: url)
+        present(safariVC, animated: true)
     }
-    */
-
+    
 }
