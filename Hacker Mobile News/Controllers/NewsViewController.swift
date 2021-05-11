@@ -13,7 +13,7 @@ class NewsViewController: UITableViewController  {
     var stories: [Story] = []
     var networkManager: NetworkManager
     var persistenceManager: PersistenceManager
-    var containerView: UIView!
+    var loadingView: UIView!
     
     init(networkManager: NetworkManager, persistenceManager: PersistenceManager) {
         self.networkManager = networkManager
@@ -110,16 +110,16 @@ class NewsViewController: UITableViewController  {
 extension NewsViewController {
     
     func startLoading() {
-        containerView = UIView(frame: tableView.bounds)
-        tableView.backgroundView = containerView
-        containerView.alpha = 0
-        UIView.animate(withDuration: 0.25) { self.containerView.alpha = 0.8 }
+        loadingView = UIView(frame: tableView.bounds)
+        tableView.backgroundView = loadingView
+        loadingView.alpha = 0
+        UIView.animate(withDuration: 0.25) { self.loadingView.alpha = 0.8 }
         let activityIndicator = UIActivityIndicatorView(style: .large)
-        containerView.addSubview(activityIndicator)
+        loadingView.addSubview(activityIndicator)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            activityIndicator.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-            activityIndicator.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
+            activityIndicator.centerYAnchor.constraint(equalTo: loadingView.centerYAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: loadingView.centerXAnchor)
         ]);
         activityIndicator.startAnimating()
     }
@@ -128,7 +128,7 @@ extension NewsViewController {
     func stopLoading() {
         DispatchQueue.main.async {
             self.tableView.backgroundView = nil
-            self.containerView = nil
+            self.loadingView = nil
             self.refreshControl?.endRefreshing()
         }
     }
