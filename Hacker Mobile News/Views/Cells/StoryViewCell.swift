@@ -39,7 +39,6 @@ class StoryViewCell: UITableViewCell {
     
     func configure() {
         accessoryType = .disclosureIndicator
-        
         let secondaryLabelsStack = UIStackView(arrangedSubviews: [
             authorLabel,
             timingLabel

@@ -109,9 +109,9 @@
 		BA2AFCD12644DB7700FFBB46 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BA2AFCD7264619D600FFBB46 /* StoryServerModel.swift */,
 				BA2AFCF3264976DA00FFBB46 /* Story+CoreDataClass.swift */,
 				BA2AFCF4264976DA00FFBB46 /* Story+CoreDataProperties.swift */,
-				BA2AFCD7264619D600FFBB46 /* StoryServerModel.swift */,
 				BA2AFCBF2644DB2000FFBB46 /* Hacker_Mobile_News.xcdatamodeld */,
 			);
 			path = Models;
