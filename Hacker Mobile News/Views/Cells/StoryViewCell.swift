@@ -32,9 +32,7 @@ class StoryViewCell: UITableViewCell {
     func set(story: Story) {
         titleLabel.text = story.title
         authorLabel.text = "\(story.author) - "
-        let intervalSinceCreation = Date().timeIntervalSince(story.createdAt)
-        let (days, hours, minutes, _) = intervalSinceCreation.secondsToDaysHoursMinutesSeconds()
-        timingLabel.text = "\(days > 0 ? "\(days)d" : "") \(hours > 0 ? "\(hours)h" : "") \(minutes > 0 ? "\(minutes)m" : "")"
+        timingLabel.text = story.createdAt.timeAgoString()
     }
     
     func configure() {

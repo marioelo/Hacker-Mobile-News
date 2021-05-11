@@ -21,11 +21,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func createRootViewController() -> UIViewController? {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
         let networkManager = NetworkManager()
         let rootViewController = NewsViewController(
             networkManager: networkManager,
-            persistenceManager: PersistenceManager(context: appDelegate.persistentContainer.viewContext)
+            persistenceManager: PersistenceManager(context: CoreDataStack.persistentContainer.viewContext)
         )
         let navigationController = UINavigationController(rootViewController: rootViewController)
         navigationController.navigationBar.prefersLargeTitles = true
@@ -58,9 +57,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
-
-        // Save changes in the application's managed object context when the application transitions to the background.
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
 
 

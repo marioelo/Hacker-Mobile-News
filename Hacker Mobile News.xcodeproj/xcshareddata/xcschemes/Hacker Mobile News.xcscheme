@@ -28,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BA902F92264A2C6900C115A5"
+               BuildableName = "Hacker Mobile NewsTests.xctest"
+               BlueprintName = "Hacker Mobile NewsTests"
+               ReferencedContainer = "container:Hacker Mobile News.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
